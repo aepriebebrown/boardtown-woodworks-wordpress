@@ -1,0 +1,26 @@
+/*
+ Theme Name:   twentyseventeen child
+ Theme URI:    http://wordpress.org/themes/twentyseventeen
+ Description:  Twentyseventeen Child Theme - Daffodiligent
+ Author:       The Wordpress Team and Daffodiligent, LLC
+ Author URI:   http://www.daffodiligent.com
+ Template:     twentyseventeen
+ Version:      1.0.0
+ Tags:         light, dark, two-columns, right-sidebar, responsive-layout, accessibility-ready
+ Text Domain:  twentyseventeen-theme-child
+*/
+@import url("../twentyseventeen/style.css");
+
+.entry-title {
+    display: none;
+}
+/*This hides the title from displaying on each page since it is already denoted in the nav*/
+
+.projects-images {
+    float:left;
+}
+
+.projects-descriptions {
+    float:right;
+    text-align: center;
+}
