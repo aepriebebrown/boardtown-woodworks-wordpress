@@ -10,8 +10,7 @@ if ( ! wisteria_has_sidebar() ) {
 }
 ?>
 <div id="site-sidebar" class="sidebar-area <?php wisteria_layout_class( 'sidebar' ); ?>">
-	<div id="secondary" class="sidebar widget-area" role="complementary" itemscope="itemscope" itemtype="http://schema.org/WPSideBar">
-		<?php do_action( 'before_sidebar' ); ?>
+	<div id="secondary" class="sidebar widget-area" role="complementary">
 		<?php dynamic_sidebar( 'sidebar-1' ); ?>
 	</div><!-- .sidebar -->
 </div><!-- .col-* columns of main sidebar -->

@@ -16,71 +16,15 @@
 
 <?php wp_head(); ?>
 </head>
-<body <?php body_class(); ?> itemscope="itemscope" itemtype="http://schema.org/WebPage">
+<body <?php body_class(); ?>>
 <div id="page" class="site-wrapper site">
 
-	<?php do_action( 'before' ); ?>
-	<header id="masthead" class="site-header" role="banner" itemscope="itemscope" itemtype="http://schema.org/WPHeader">
-		<div class="container">
-			<div class="row">
-				<div class="col-xl-12">
+	<?php
+	// Site Header
+	get_template_part( 'template-parts/site-header' );
 
-					<div class="site-header-inside">
-
-						<div class="site-branding-wrapper">
-							<?php
-							// Site Logo
-							wisteria_the_custom_logo();
-							?>
-
-							<div class="site-branding">
-								<h2 class="site-title" itemprop="headline"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h2>
-								<?php
-								$description = get_bloginfo( 'description', 'display' );
-								if ( $description || is_customize_preview() ) :
-								?>
-								<h3 class="site-description" itemprop="description"><?php echo $description; /* WPCS: xss ok. */ ?></h3>
-								<?php endif; ?>
-							</div>
-						</div><!-- .site-branding-wrapper -->
-
-						<div class="toggle-menu-wrapper">
-							<a href="#main-navigation-responsive" title="<?php esc_attr_e( 'Menu', 'wisteria' ); ?>" class="toggle-menu-control">
-								<span class="screen-reader-text"><?php esc_html_e( 'Menu', 'wisteria' ); ?></span>
-							</a>
-						</div>
-
-					</div><!-- .site-header-inside -->
-
-				</div><!-- .col-xl-12 -->
-			</div><!-- .row -->
-		</div><!-- .container -->
-	</header><!-- #masthead -->
-
-	<nav id="site-navigation" class="main-navigation" role="navigation" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
-		<div class="container">
-			<div class="row">
-				<div class="col-xl-12">
-
-					<div class="main-navigation-inside">
-
-						<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'wisteria' ); ?></a>
-
-						<?php
-						wp_nav_menu( apply_filters( 'wisteria_primary_menu_args', array(
-							'container'       => 'div',
-							'container_class' => 'site-primary-menu',
-							'theme_location'  => 'primary',
-							'menu_class'      => 'primary-menu sf-menu',
-							'depth'           => 3,
-						) ) );
-						?>
-
-					</div><!-- .main-navigation-inside -->
-
-				</div><!-- .col-xl-12 -->
-			</div><!-- .row -->
-		</div><!-- .container -->
-	</nav><!-- .main-navigation -->
+	// Site Navigation
+	get_template_part( 'template-parts/site-navigation' );
+	?>
 
 	<div id="content" class="site-content">

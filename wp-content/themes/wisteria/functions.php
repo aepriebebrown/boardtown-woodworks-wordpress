@@ -36,11 +36,15 @@ function wisteria_setup() {
 
 	/*
 	 * Enable support for custom logo.
+	 *
+	 * @link https://codex.wordpress.org/Theme_Logo
 	 */
 	add_theme_support( 'custom-logo', array(
-		'width'       => 560,
-		'height'      => 140,
+		'height'      => 400,
+		'width'       => 580,
 		'flex-height' => true,
+		'flex-width'  => true,
+		'header-text' => array( 'site-title', 'site-description' ),
 	) );
 
 	/*
@@ -51,11 +55,11 @@ function wisteria_setup() {
 	add_theme_support( 'post-thumbnails' );
 
 	// Theme Image Sizes
-	add_image_size( 'wisteria-featured', 334, 250, true );
+	add_image_size( 'wisteria-featured', 660, 577, true );
 
 	// This theme uses wp_nav_menu() in four locations.
 	register_nav_menus( array (
-		'primary'   => esc_html__( 'Primary Menu', 'wisteria' ),
+		'header-menu' => esc_html__( 'Header Menu', 'wisteria' ),
 	) );
 
 	// This theme styles the visual editor to resemble the theme style.
@@ -69,16 +73,8 @@ function wisteria_setup() {
 		'comment-form', 'comment-list', 'gallery', 'caption'
 	) );
 
-	/*
-	 * Enable support for Post Formats.
-	 * See http://codex.wordpress.org/Post_Formats
-	 */
-	add_theme_support( 'post-formats', array (
-		'aside', 'audio', 'gallery', 'image', 'link', 'quote', 'video',
-	) );
-
 	// Setup the WordPress core custom background feature.
-	add_theme_support( 'custom-background', apply_filters( 'arcane_custom_background_args', array (
+	add_theme_support( 'custom-background', apply_filters( 'wisteria_custom_background_args', array (
 		'default-color' => 'f8f8f8',
 		'default-image' => '',
 	) ) );
@@ -95,7 +91,7 @@ add_action( 'after_setup_theme', 'wisteria_setup' );
  * @global int $content_width
  */
 function wisteria_content_width() {
-	$GLOBALS['content_width'] = apply_filters( 'wisteria_content_width', 668 );
+	$GLOBALS['content_width'] = apply_filters( 'wisteria_content_width', 758 );
 }
 add_action( 'after_setup_theme', 'wisteria_content_width', 0 );
 
@@ -152,13 +148,13 @@ function wisteria_scripts() {
 	 * Enqueue CSS files
 	 */
 
-	// Bootstrap
-	wp_enqueue_style( 'wisteria-bootstrap', get_template_directory_uri() . '/css/bootstrap.css' );
+	// Bootstrap Custom
+	wp_enqueue_style( 'wisteria-bootstrap-custom', get_template_directory_uri() . '/css/bootstrap-custom.css' );
 
 	// Fontawesome
 	wp_enqueue_style( 'font-awesome', get_template_directory_uri() . '/css/font-awesome.css' );
 
-	// Google Fonts
+	// Fonts
 	wp_enqueue_style( 'wisteria-fonts', wisteria_fonts_url(), array(), null );
 
 	// Theme Stylesheet

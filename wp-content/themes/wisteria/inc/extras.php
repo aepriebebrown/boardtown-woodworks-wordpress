@@ -13,24 +13,33 @@
  * @param string $theme_mod - Theme modification name.
  * @return mixed
  */
-function wisteria_default( $theme_mod = 'wisteria_sidebar_position' ) {
+function wisteria_default( $theme_mod = '' ) {
 
-	$wisteria_default = array(
+	$default = array (
 		'wisteria_sidebar_position' => 'right',
+		'wisteria_copyright'        => sprintf( '&copy; Copyright %1$s - <a href="%2$s">%3$s</a>', esc_html( date_i18n( __( 'Y', 'wisteria' ) ) ), esc_attr( esc_url( home_url( '/' ) ) ), esc_html( get_bloginfo( 'name' ) ) ),
+		'wisteria_credit'           => true,
 	);
 
-	if ( isset( $wisteria_default[$theme_mod] ) ) {
-		return $wisteria_default[$theme_mod];
-	}
-
-	return '';
+	return ( isset ( $default[$theme_mod] ) ? $default[$theme_mod] : '' );
 
 }
 
 /**
- * Register Google fonts for Wisteria.
+ * Theme Mod Wrapper
  *
- * @return string Google fonts URL for the theme.
+ * @param string $theme_mod - Name of the theme mod to retrieve.
+ * @return mixed
+ */
+function wisteria_mod( $theme_mod = '' ) {
+	return get_theme_mod( $theme_mod, wisteria_default( $theme_mod ) );
+}
+
+if ( ! function_exists( 'wisteria_fonts_url' ) ) :
+/**
+ * Register fonts for theme.
+ *
+ * @return string Fonts URL for the theme.
  */
 function wisteria_fonts_url() {
 
@@ -39,7 +48,7 @@ function wisteria_fonts_url() {
 	$fonts     = array();
 	$subsets   = 'latin,latin-ext';
 
-    /* Translators: If there are characters in your language that are not
+	/* Translators: If there are characters in your language that are not
     * supported by Montserrat, translate this to 'off'. Do not translate
     * into your own language.
     */
@@ -47,12 +56,12 @@ function wisteria_fonts_url() {
 		$fonts[] = 'Montserrat:400,700';
 	}
 
-	/* Translators: If there are characters in your language that are not
+    /* Translators: If there are characters in your language that are not
     * supported by Lato, translate this to 'off'. Do not translate
     * into your own language.
     */
     if ( 'off' !== esc_html_x( 'on', 'Lato font: on or off', 'wisteria' ) ) {
-		$fonts[] = 'Lato:400,400italic,700,700italic';
+		$fonts[] = 'Lato:400,400i,700,700i';
 	}
 
 	/* Translators: To add an additional character subset specific to your language,
@@ -61,13 +70,13 @@ function wisteria_fonts_url() {
 	*/
 	$subset = esc_html_x( 'no-subset', 'Add new subset (cyrillic, greek, devanagari, vietnamese)', 'wisteria' );
 
-	if ( 'cyrillic' == $subset ) {
+	if ( 'cyrillic' === $subset ) {
 		$subsets .= ',cyrillic,cyrillic-ext';
-	} elseif ( 'greek' == $subset ) {
+	} elseif ( 'greek' === $subset ) {
 		$subsets .= ',greek,greek-ext';
-	} elseif ( 'devanagari' == $subset ) {
+	} elseif ( 'devanagari' === $subset ) {
 		$subsets .= ',devanagari';
-	} elseif ( 'vietnamese' == $subset ) {
+	} elseif ( 'vietnamese' === $subset ) {
 		$subsets .= ',vietnamese';
 	}
 
@@ -78,9 +87,25 @@ function wisteria_fonts_url() {
 		), 'https://fonts.googleapis.com/css' );
 	}
 
-	return $fonts_url;
+	/**
+	 * Filters the Google Fonts URL.
+	 *
+	 * @param string $fonts_url Google Fonts URL.
+	 */
+	return apply_filters( 'wisteria_fonts_url', $fonts_url );
 
 }
+endif;
+
+/**
+ * Filter 'get_custom_logo'
+ *
+ * @return string
+ */
+function wisteria_get_custom_logo( $html ) {
+	return sprintf( '<div class="site-logo-wrapper">%1$s</div>', $html );
+}
+add_filter( 'get_custom_logo', 'wisteria_get_custom_logo' );
 
 /**
  * Get our wp_nav_menu() fallback, wp_page_menu(), to show a home link.
@@ -90,7 +115,7 @@ function wisteria_fonts_url() {
  */
 function wisteria_page_menu_args( $args ) {
 	$args['show_home'] = true;
-	$args['menu_class'] = 'site-primary-menu';
+	$args['menu_class'] = 'site-header-menu';
 	return $args;
 }
 add_filter( 'wp_page_menu_args', 'wisteria_page_menu_args' );
@@ -99,7 +124,7 @@ add_filter( 'wp_page_menu_args', 'wisteria_page_menu_args' );
  * Add ID and CLASS attributes to the first <ul> occurence in wp_page_menu
  */
 function wisteria_page_menu_class( $class ) {
-  return preg_replace( '/<ul>/', '<ul class="primary-menu sf-menu">', $class, 1 );
+  return preg_replace( '/<ul>/', '<ul class="header-menu sf-menu">', $class, 1 );
 }
 add_filter( 'wp_page_menu', 'wisteria_page_menu_class' );
 
@@ -110,7 +135,19 @@ add_filter( 'wp_page_menu', 'wisteria_page_menu_class' );
  * @return int
  */
 function wisteria_excerpt_length( $length ) {
-	return apply_filters( 'wisteria_excerpt_length', 10 );
+    if ( is_admin() ) {
+		return $length;
+	}
+
+    // Custom Excerpt Length
+    $length = 25;
+
+	/**
+	 * Filters the Excerpt length.
+	 *
+	 * @param int $length Excerpt Length.
+	 */
+	return apply_filters( 'wisteria_excerpt_length', $length );
 }
 add_filter( 'excerpt_length', 'wisteria_excerpt_length' );
 
@@ -122,7 +159,19 @@ add_filter( 'excerpt_length', 'wisteria_excerpt_length' );
  * @return str
  */
 function wisteria_excerpt_more( $more ) {
-	return '&hellip;';
+	if ( is_admin() ) {
+		return $more;
+	}
+
+	// Custom Excerpt More
+    $more = '&hellip;';
+
+    /**
+	 * Filters the Excerpt more string.
+	 *
+	 * @param string $excerpt_more Excerpt More.
+	 */
+	return apply_filters( 'wisteria_excerpt_more', $more );
 }
 add_filter( 'excerpt_more', 'wisteria_excerpt_more' );
 
@@ -138,16 +187,6 @@ function wisteria_the_content_more_link_scroll( $link ) {
 	return $link;
 }
 add_filter( 'the_content_more_link', 'wisteria_the_content_more_link_scroll' );
-
-/**
- * Filter 'the_site_logo'
- *
- * @return string
- */
-function wisteria_get_custom_logo( $html ) {
-	return '<div class="site-logo-wrapper">' . $html . '</div>';
-}
-add_filter( 'get_custom_logo', 'wisteria_get_custom_logo' );
 
 /**
  * Filter `body_class`
@@ -185,9 +224,14 @@ function wisteria_body_classes( $classes ) {
 
 	// Sidebar Position Class
 	if ( wisteria_has_sidebar() ) {
-		$classes[] = 'has-' . esc_attr( get_theme_mod( 'wisteria_sidebar_position', wisteria_default( 'wisteria_sidebar_position' ) ) ) . '-sidebar';
+		$classes[] = 'has-' . esc_attr( wisteria_mod( 'wisteria_sidebar_position' ) ) . '-sidebar';
 	} else {
 		$classes[] = 'has-no-sidebar';
+	}
+
+	// Excerpt Class
+	if ( wisteria_has_excerpt() ) {
+		$classes[] = 'has-excerpt';
 	}
 
 	return $classes;
@@ -195,39 +239,84 @@ function wisteria_body_classes( $classes ) {
 add_filter( 'body_class', 'wisteria_body_classes' );
 
 /**
- * Display Blog Credits.
+ * Blog Credits.
  *
  * @return void
  */
-function wisteria_credit_blog() {
-	$credit_blog_string = '<div class="credit-blog">&copy; %1$s %2$s <span>&sdot;</span> <a href="%3$s">%4$s</a></div>';
-	printf( $credit_blog_string,
-		esc_html__( 'Copyright', 'wisteria' ),
-		esc_html( date( 'Y' ) ),
-		esc_url( home_url() ),
-		esc_html( get_bloginfo( 'name' ) )
-	);
+function wisteria_credits_blog() {
+	$html = '<div class="credits credits-blog">'. wisteria_mod( 'wisteria_copyright' ) .'</div>';
+
+	/**
+	 * Filters the Blog Credits HTML.
+	 *
+	 * @param string $html Blog Credits HTML.
+	 */
+	$html = apply_filters( 'wisteria_credits_blog_html', $html );
+
+	echo convert_chars( convert_smilies( wptexturize( stripslashes( wp_filter_post_kses( addslashes( $html ) ) ) ) ) ); // WPCS: XSS OK.
 }
-add_action( 'wisteria_credits', 'wisteria_credit_blog' );
+add_action( 'wisteria_credits', 'wisteria_credits_blog' );
 
 /**
- * Display Designer Credits.
+ * Designer Credits.
  *
  * @return void
  */
-function wisteria_credit_designer() {
-	$credit_designer_string = '<a href="%1$s" title="%2$s">%3$s</a> <span>&sdot;</span> %4$s <a href="%5$s" title="%6$s">%7$s</a>';
-	printf( $credit_designer_string,
-		esc_url( 'http://wpfriendship.com/wisteria/' ),
+function wisteria_credits_designer() {
+	$designer_string = sprintf( '<a href="%1$s" title="%2$s">%3$s</a> %4$s <span>&sdot;</span> %5$s <a href="%6$s" title="%7$s">%8$s</a>',
+		esc_url( 'https://wpfriendship.com/wisteria/' ),
 		esc_attr( 'Wisteria Theme' ),
 		esc_html( 'Wisteria Theme' ),
+		esc_html( 'by WPFriendship', 'wisteria' ),
 		esc_html__( 'Powered by', 'wisteria' ),
 		esc_url( 'https://wordpress.org/' ),
 		esc_attr( 'WordPress', 'wisteria' ),
 		esc_html( 'WordPress' )
 	);
+
+	// Designer HTML
+	$html = '<div class="credits credits-designer">'. $designer_string .'</div>';
+
+	/**
+	 * Filters the Designer HTML.
+	 *
+	 * @param string $html Designer HTML.
+	 */
+	$html = apply_filters( 'wisteria_credits_designer_html', $html );
+
+	echo $html; // WPCS: XSS OK.
 }
-add_action( 'wisteria_credits', 'wisteria_credit_designer' );
+add_action( 'wisteria_credits', 'wisteria_credits_designer' );
+
+/**
+ * Enqueues front-end CSS to hide elements.
+ *
+ * @see wp_add_inline_style()
+ */
+function wisteria_hide_elements() {
+	// Elements
+	$elements = array();
+
+	// Credit
+	if ( false === wisteria_mod( 'wisteria_credit' ) ) {
+		$elements[] = '.credits-designer';
+	}
+
+	// Bail if their are no elements to process
+	if ( 0 === count( $elements ) ) {
+		return;
+	}
+
+	// Build Elements
+	$elements = implode( ',', $elements );
+
+	// Build CSS
+	$css = sprintf( '%1$s { clip: rect(1px, 1px, 1px, 1px); position: absolute; }', $elements );
+
+	// Add Inline Style
+	wp_add_inline_style( 'wisteria-style', wisteria_minify_css( $css ) );
+}
+add_action( 'wp_enqueue_scripts', 'wisteria_hide_elements', 11 );
 
 /**
  * Filter in a link to a content ID attribute for the next/previous image links on image attachment pages
@@ -245,27 +334,6 @@ function wisteria_attachment_link( $url, $id ) {
 	return $url;
 }
 add_filter( 'attachment_link', 'wisteria_attachment_link', 10, 2 );
-
-/**
- * Sets the authordata global when viewing an author archive.
- *
- * This provides backwards compatibility with
- * http://core.trac.wordpress.org/changeset/25574
- *
- * It removes the need to call the_post() and rewind_posts() in an author
- * template to print information about the author.
- *
- * @global WP_Query $wp_query WordPress Query object.
- * @return void
- */
-function wisteria_setup_author() {
-	global $wp_query;
-
-	if ( $wp_query->is_author() && isset( $wp_query->post ) ) {
-		$GLOBALS['authordata'] = get_userdata( $wp_query->post->post_author );
-	}
-}
-add_action( 'wp', 'wisteria_setup_author' );
 
 if ( ! function_exists( 'wisteria_the_attached_image' ) ) :
 /**
@@ -311,7 +379,7 @@ function wisteria_the_attached_image() {
 		if ( count( $attachment_ids ) > 1 ) {
 
 			foreach ( $attachment_ids as $key => $attachment_id ) {
-				if ( $attachment_id == $post->ID ) {
+				if ( $attachment_id === $post->ID ) {
 					break;
 				}
 			}
@@ -339,3 +407,26 @@ function wisteria_the_attached_image() {
 
 }
 endif;
+
+/**
+ * Minify the CSS.
+ *
+ * @param string $css.
+ * @return minified css
+ */
+function wisteria_minify_css( $css ) {
+
+    // Remove CSS comments
+    $css = preg_replace( '!/\*[^*]*\*+([^/][^*]*\*+)*/!', '', $css );
+
+    // Remove space after colons
+	$css = str_replace( ': ', ':', $css );
+
+	// Remove space before curly braces
+	$css = str_replace( ' {', '{', $css );
+
+    // Remove whitespace i.e tabs, spaces, newlines, etc.
+    $css = str_replace( array( "\r\n", "\r", "\n", "\t", '  ', '    ', '     '), '', $css );
+
+    return $css;
+}

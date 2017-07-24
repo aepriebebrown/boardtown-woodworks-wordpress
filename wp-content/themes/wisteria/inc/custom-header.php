@@ -10,14 +10,12 @@
  * Set up the WordPress core custom header feature.
  *
  * @uses wisteria_header_style()
- * @uses wisteria_admin_header_style()
- * @uses wisteria_admin_header_image()
  */
 function wisteria_custom_header_setup() {
 	add_theme_support( 'custom-header', apply_filters( 'wisteria_custom_header_args', array(
 		'default-text-color' => '3d3d3d',
 		'width'              => 1920,
-		'height'             => 150,
+		'height'             => 185,
 		'flex-height'        => true,
 		'wp-head-callback'   => 'wisteria_header_style',
 	) ) );

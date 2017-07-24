@@ -10,8 +10,8 @@ get_header(); ?>
 	<div class="container">
 		<div class="row">
 
-			<div id="primary" class="content-area <?php wisteria_layout_class( 'content' ); ?>">
-				<main id="main" class="site-main" role="main" itemprop="mainContentOfPage" itemscope="itemscope" itemtype="http://schema.org/SearchResultsPage">
+			<section id="primary" class="content-area <?php wisteria_layout_class( 'content' ); ?>">
+				<main id="main" class="site-main" role="main">
 
 				<?php if ( have_posts() ) : ?>
 
@@ -19,6 +19,7 @@ get_header(); ?>
 						<h1 class="page-title"><?php printf( esc_html__( 'Search Results for: %s', 'wisteria' ), '<span>' . get_search_query() . '</span>' ); ?></h1>
 					</header><!-- .page-header -->
 
+					<div id="post-wrapper" class="post-wrapper post-wrapper-archive post-wrapper-search">
 					<?php /* Start the Loop */ ?>
 					<?php while ( have_posts() ) : the_post(); ?>
 
@@ -31,6 +32,7 @@ get_header(); ?>
 						?>
 
 					<?php endwhile; ?>
+					</div><!-- .post-wrapper -->
 
 					<?php wisteria_the_posts_pagination(); ?>
 
@@ -41,7 +43,7 @@ get_header(); ?>
 				<?php endif; ?>
 
 				</main><!-- #main -->
-			</div><!-- #primary -->
+			</section><!-- #primary -->
 
 			<?php get_sidebar(); ?>
 

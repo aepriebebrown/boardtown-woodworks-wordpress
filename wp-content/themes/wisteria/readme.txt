@@ -1,11 +1,11 @@
 === Wisteria ===
 Contributors: WPFriendship.com
-Requires at least: WordPress 4.5
-Tested up to: WordPress 4.6.1
-Version: 1.0.1
+Requires at least: WordPress 4.6
+Tested up to: WordPress 4.8
+Version: 1.0.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Tags: two-columns, left-sidebar, right-sidebar, custom-background, custom-colors, custom-header, custom-menu, editor-style, featured-images, flexible-header, microformats, post-formats, rtl-language-support, sticky-post, theme-options, threaded-comments, translation-ready, news
+Tags: two-columns, left-sidebar, right-sidebar, custom-background, custom-colors, custom-header, custom-menu, editor-style, featured-images, flexible-header, rtl-language-support, sticky-post, theme-options, threaded-comments, translation-ready, blog, news
 
 == Description ==
 Wisteria is a charming and modern blog WordPress theme. It has a responsive layout having clean and content focused design with straightforward functionality. Wisteria is a perfect solution for sharing your valuable content and creativity with the world. Wisteria is a versatile, sophisticated WordPress theme designed for creatives and bloggers.
@@ -16,7 +16,7 @@ Wisteria is a charming and modern blog WordPress theme. It has a responsive layo
 * Post Formats
 * The GPL v2.0 or later license. :) Use it to make something cool.
 
-For more information about Wisteria please go to http://wpfriendship.com/wisteria.
+For more information about Wisteria please go to https://wpfriendship.com/wisteria.
 
 == Notes ==
 
@@ -27,12 +27,12 @@ Primary Menu supports up to three levels.
 1. In your admin panel, go to Appearance -> Themes and click the 'Add New' button.
 2. Type in Wisteria in the search form and press the 'Enter' key on your keyboard.
 3. Click on the 'Activate' button to use your new theme right away.
-4. Go to http://wpfriendship.com/wisteria for a guide on how to customize this theme.
+4. Go to https://wpfriendship.com/wisteria for a guide on how to customize this theme.
 5. Navigate to Appearance > Customize in your admin panel and customize to taste.
 
 == Copyright ==
 
-Wisteria WordPress Theme, Copyright 2013-2016 WPFriendship.com
+Wisteria WordPress Theme, Copyright 2013-2017 WPFriendship.com
 Wisteria is distributed under the terms of the GNU GPL
 
 This program is free software: you can redistribute it and/or modify
@@ -52,27 +52,33 @@ Please see the file headers for more information.
 
 = FONTS =
 
-Font Awesome v4.6.3, Copyright: Dave Gandy, https://twitter.com/davegandy
+Font Awesome v4.7.0
+Copyright: Dave Gandy, https://twitter.com/davegandy
 License: http://fontawesome.io/license (Font: SIL OFL 1.1, CSS: MIT License)
 Source: http://fontawesome.io - @fontawesome
 
 = CSS =
 
-Bootstrap v4.0.0-alpha.2, Copyright 2011-2015 Twitter, Inc.
+Bootstrap v4.0.0-alpha.6
+Copyright 2011-2017 The Bootstrap Authors
+Copyright 2011-2017 Twitter, Inc.
 License: MIT
 Source: http://getbootstrap.com
 
 = JS =
 
-Awesome Media Queries in JavaScript v2.1.2, Copyright (c) 2014 Nick Williams
+Awesome Media Queries in JavaScript v2.1.2
+Copyright (c) 2014 Nick Williams
 License: MIT
 Source: http://wicky.nillia.ms/enquire.js
 
-hoverIntent r7, Copyright 2007, 2013 Brian Cherne
+hoverIntent r7
+Copyright 2007, 2013 Brian Cherne
 License: MIT
 Source: http://cherne.net/brian/resources/jquery.hoverIntent.html
 
-jQuery Superfish Menu Plugin v1.7.5, Copyright (c) 2014 Joel Birch
+jQuery Superfish Menu Plugin v1.7.7
+Copyright (c) 2013 Joel Birch
 Licenses: MIT/GPL
 Source: http://users.tpg.com.au/j_birch/plugins/superfish/
 
@@ -82,10 +88,61 @@ Image used in screenshot.png
 Licensed under the terms of CC0
 Source: https://unsplash.com/
 
-- https://unsplash.com/photos/2uOcrLACf_4
-- https://unsplash.com/photos/YoadQb46v6k
+- https://unsplash.com/photos/E5iq0v5jv4Q
+- https://unsplash.com/photos/NYqEk7a42yc
+- https://unsplash.com/photos/E84EfgqHrBk
 
 == Changelog ==
+
+= 1.0.6 =
+Released: July 1, 2017
+
+* Site Title and Tagline typography improved.
+
+= 1.0.5 =
+Released: June 24, 2017
+
+* Enhanced Mobile off-screen responsive menu added.
+* Bootstrap grid updated.
+* HTML5 tags added wherever required.
+* Font Awesome library updated to 4.7.0 version.
+* Code is more organized and simplified.
+* Menu label changed to `Header Menu`.
+* Post Formats support dropped.
+* Custom Header height increased to `250px`.
+* Filters improvements to support child themes.
+* POT file updated.
+
+= 1.0.4 =
+Released: March 29, 2017
+
+* Bootstrap grid updated.
+* Excerpt length increased.
+* Content width increased.
+* Featured image size increased to support retina devices.
+* Design tweaks.
+* Google fonts loaded with the new format.
+* RTL Sidebar postion bug fixed.
+
+= 1.0.3 =
+Released: March 19, 2017
+
+* Un-necessary actions removed.
+* Action removed `wisteria_setup_author`.
+* Singular placeholder added in `comments.php`.
+* Retrieve the default date in localized format in the theme footer.
+* Admin check added for the `excerpt_length` and `excerpt_more`.
+* Prefix correction from `WP_Wisteria_Button_Control` to `Wisteria_Button_Control`.
+* POT file updated.
+
+= 1.0.2 =
+Released: January 14, 2017
+
+* New `Footer Options` section added in the `Theme Options` panel.
+* Invalid schema markup removed.
+* Custom logo handling improved.
+* Filters added to enhance the child theme support.
+* Code improvements.
 
 = 1.0.1 =
 Released: November 18, 2016

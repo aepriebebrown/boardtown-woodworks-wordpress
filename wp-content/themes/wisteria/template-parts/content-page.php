@@ -6,14 +6,21 @@
  */
 ?>
 
-<article id="post-<?php the_ID(); ?>" <?php post_class(); ?> itemscope="itemscope" itemtype="http://schema.org/CreativeWork">
-	<div class="entry-header-wrapper">
-		<header class="entry-header">
-			<?php the_title( '<h1 class="entry-title" itemprop="headline">', '</h1>' ); ?>
+<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+
+	<div class="entry-header-wrapper entry-header-wrapper-single">
+		<?php if ( wisteria_has_post_edit_link() ) : ?>
+		<div class="entry-meta entry-meta-single entry-meta-header-before">
+			<?php wisteria_post_edit_link(); ?>
+		</div><!-- .entry-meta -->
+		<?php endif; ?>
+
+		<header class="entry-header entry-header-single">
+			<?php the_title( '<h1 class="entry-title entry-title-single">', '</h1>' ); ?>
 		</header><!-- .entry-header -->
 	</div><!-- .entry-header-wrapper -->
 
-	<div class="entry-content" itemprop="text">
+	<div class="entry-content entry-content-single">
 		<?php the_content(); ?>
 		<?php
 			wp_link_pages( array(
@@ -25,9 +32,10 @@
 		?>
 	</div><!-- .entry-content -->
 
-	<?php if ( '' != get_edit_post_link() ) : ?>
-	<footer class="entry-meta entry-meta-footer">
+	<?php if ( wisteria_has_post_edit_link() ) : ?>
+	<footer class="entry-meta entry-meta-single entry-meta-footer">
 		<?php wisteria_entry_footer(); ?>
 	</footer><!-- .entry-meta -->
 	<?php endif; ?>
+
 </article><!-- #post-## -->

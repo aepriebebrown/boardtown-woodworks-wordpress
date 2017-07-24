@@ -6,22 +6,23 @@
  */
 ?>
 
-<article id="post-<?php the_ID(); ?>" <?php post_class(); ?> itemscope="itemscope" itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
-	<div class="entry-header-wrapper">
-		<div class="entry-meta entry-meta-header-before">
-			<ul>
-				<li><?php wisteria_posted_on(); ?></li>
-				<li><?php wisteria_posted_by(); ?></li>
-				<?php wisteria_post_format( '<li>', '</li>' ); ?>
-			</ul>
+<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+
+	<div class="entry-header-wrapper entry-header-wrapper-single">
+		<div class="entry-meta entry-meta-single entry-meta-header-before">
+			<?php
+			wisteria_posted_on();
+			wisteria_posted_by();
+			wisteria_post_edit_link();
+			?>
 		</div><!-- .entry-meta -->
 
-		<header class="entry-header">
-			<?php the_title( '<h1 class="entry-title" itemprop="headline">', '</h1>' ); ?>
+		<header class="entry-header entry-header-single">
+			<?php the_title( '<h1 class="entry-title entry-title-single">', '</h1>' ); ?>
 		</header><!-- .entry-header -->
 	</div><!-- .entry-header-wrapper -->
 
-	<div class="entry-content" itemprop="text">
+	<div class="entry-content entry-content-single">
 		<?php the_content(); ?>
 		<?php
 			wp_link_pages( array(
@@ -33,7 +34,8 @@
 		?>
 	</div><!-- .entry-content -->
 
-	<footer class="entry-meta entry-meta-footer">
+	<footer class="entry-meta entry-meta-single entry-meta-footer">
 		<?php wisteria_entry_footer(); ?>
 	</footer><!-- .entry-meta -->
+
 </article><!-- #post-## -->

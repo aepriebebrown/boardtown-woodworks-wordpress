@@ -15,9 +15,10 @@ get_header(); ?>
 	<div class="container">
 		<div class="row">
 
-			<div id="primary" class="content-area <?php wisteria_layout_class( 'content' ); ?>">
-				<main id="main" class="site-main" role="main" itemprop="mainContentOfPage">
+			<section id="primary" class="content-area <?php wisteria_layout_class( 'content' ); ?>">
+				<main id="main" class="site-main" role="main">
 
+					<div id="post-wrapper" class="post-wrapper post-wrapper-single post-wrapper-page">
 					<?php while ( have_posts() ) : the_post(); ?>
 
 						<?php get_template_part( 'template-parts/content', 'page' ); ?>
@@ -30,9 +31,10 @@ get_header(); ?>
 						?>
 
 					<?php endwhile; // end of the loop. ?>
+					</div><!-- .post-wrapper -->
 
 				</main><!-- #main -->
-			</div><!-- #primary -->
+			</section><!-- #primary -->
 
 			<?php get_sidebar(); ?>
 

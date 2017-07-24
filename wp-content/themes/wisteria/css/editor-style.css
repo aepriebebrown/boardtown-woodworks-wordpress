@@ -9,7 +9,7 @@
 	font-family: "Lato", sans-serif;
 	font-size: 17px;
 	line-height: 1.7;
-	width: 730px;
+	width: 758px;
 }
 
 /* Paragraph */
@@ -66,21 +66,20 @@ h6:first-child {
 /* Links */
 a,
 a:visited {
-	color: #f24444;
+	color: #9b59b6;
 	text-decoration: none;
 }
 a:hover,
 a:focus,
 a:active {
-	color: #d93d3d;
+	color: #c9a0dc;
 }
 
 /* Blockquote */
 blockquote {
 	color: #555;
-	border-left: 6px solid #f24444;
-	font-family: "Source Sans Pro", sans-serif;
-	font-size: 24px;
+	border-left: 6px solid #9b59b6;
+	font-family: "Lato", sans-serif;	font-size: 24px;
 	line-height: 1.3;
 	margin: 0 auto 26px;
 	padding: 15px;

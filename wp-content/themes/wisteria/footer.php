@@ -10,29 +10,16 @@
 
 	</div><!-- #content -->
 
-	<footer id="colophon" class="site-footer" role="contentinfo" itemscope="itemscope" itemtype="http://schema.org/WPFooter">
-
-		<div class="site-info">
-			<div class="site-info-inside">
-
-				<div class="container">
-					<div class="row">
-						<div class="col-xl-12">
-
-							<div class="credits">
-								<?php do_action( 'wisteria_credits' ); ?>
-							</div><!-- .credits -->
-
-						</div><!-- .col -->
-					</div><!-- .row -->
-				</div><!-- .container -->
-
-			</div><!-- .site-info-inside -->
-		</div><!-- .site-info -->
-
+	<footer id="colophon" class="site-footer" role="contentinfo">
+		<?php
+		// Site Info
+		get_template_part( 'template-parts/site-info' );
+		?>
 	</footer><!-- #colophon -->
 
 </div><!-- #page .site-wrapper -->
+
+<div class="overlay-effect"></div><!-- .overlay-effect -->
 
 <?php wp_footer(); ?>
 </body>

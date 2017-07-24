@@ -6,43 +6,32 @@
  */
 ?>
 
-<article id="post-<?php the_ID(); ?>" <?php post_class(); ?> itemscope="itemscope" itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
-	<div class="post-content-wrapper">
+<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+	<div class="post-content-wrapper post-content-wrapper-archive">
 
-		<?php if ( wisteria_has_post_thumbnail() ) : ?>
-		<div class="entry-image-wrapper">
-			<?php wisteria_post_thumbnail(); ?>
-		</div><!-- .entry-image-wrapper -->
-		<?php endif; ?>
+		<?php wisteria_post_thumbnail(); ?>
 
-		<div class="entry-data-wrapper">
+		<div class="entry-data-wrapper entry-data-wrapper-archive">
 			<div class="entry-header-wrapper entry-header-wrapper-archive">
-				<?php if ( 'post' == get_post_type() ) : // For Posts ?>
+				<?php if ( 'post' === get_post_type() ) : // For Posts ?>
 				<div class="entry-meta entry-meta-header-before">
-					<ul>
-						<li><?php wisteria_first_category(); ?></li>
-						<?php wisteria_post_format( '<li>', '</li>' ); ?>
-						<?php if ( is_sticky() && is_home() && ! is_paged() ) : ?>
-						<li>
-							<span class="post-label post-label-featured">
-								<span class="screen-reader-text"><?php esc_html_e( 'Featured', 'wisteria' ); ?></span>
-							</span>
-						</li>
-						<?php endif; ?>
-					</ul>
+					<?php
+					wisteria_post_first_category();
+					wisteria_sticky_post();
+					?>
 				</div><!-- .entry-meta -->
 				<?php endif; ?>
 
 				<header class="entry-header">
-					<?php the_title( '<h1 class="entry-title" itemprop="headline"><a href="' . esc_url( wisteria_get_link_url() ) . '" rel="bookmark">', '</a></h1>' ); ?>
+					<?php the_title( sprintf( '<h1 class="entry-title"><a href="%1$s" rel="bookmark">', esc_url( get_permalink() ) ), '</a></h1>' ); ?>
 				</header><!-- .entry-header -->
 
-				<?php if ( 'post' == get_post_type() ) : // For Posts ?>
+				<?php if ( 'post' === get_post_type() ) : // For Posts ?>
 				<div class="entry-meta entry-meta-header-after">
-					<ul>
-						<li><?php wisteria_posted_on(); ?></li>
-						<li><?php wisteria_posted_by(); ?></li>
-					</ul>
+					<?php
+					wisteria_posted_on();
+					wisteria_posted_by();
+					?>
 				</div><!-- .entry-meta -->
 				<?php endif; ?>
 			</div><!-- .entry-header-wrapper -->

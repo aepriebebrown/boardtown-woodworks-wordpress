@@ -13,7 +13,7 @@ get_header(); ?>
 		<div class="row">
 
 			<section id="primary" class="content-area <?php wisteria_layout_class( 'content' ); ?>">
-				<main id="main" class="site-main" role="main" itemprop="mainContentOfPage" itemscope="itemscope" itemtype="http://schema.org/Blog">
+				<main id="main" class="site-main" role="main">
 
 				<?php if ( have_posts() ) : ?>
 
@@ -24,6 +24,7 @@ get_header(); ?>
 						?>
 					</header><!-- .page-header -->
 
+					<div id="post-wrapper" class="post-wrapper post-wrapper-archive">
 					<?php /* Start the Loop */ ?>
 					<?php while ( have_posts() ) : the_post(); ?>
 
@@ -36,6 +37,7 @@ get_header(); ?>
 						?>
 
 					<?php endwhile; ?>
+					</div><!-- .post-wrapper -->
 
 					<?php wisteria_the_posts_pagination(); ?>
 
