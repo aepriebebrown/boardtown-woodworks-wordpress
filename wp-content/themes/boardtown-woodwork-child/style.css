@@ -440,12 +440,15 @@ footer {
         float: left;
         clear: none;
         padding: 0 6.25% 6.25% 0;
+        width: 30%;
         max-width: 300px;
     }
 
     .project-1-main-text {
-        margin-top: -20px;
+        margin-top: -27px;
         text-align: left;
+        float: right;
+        width: 70%;
     }
 
     .project-1-main-text h2{

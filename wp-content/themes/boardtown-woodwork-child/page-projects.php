@@ -17,8 +17,8 @@ get_header(); ?>
 		<main id="main" class="site-main" role="main">
             <div id="wrapper">
                 <div class="projects-main">
-                    <?php query_posts(); ?>
-                    <?php while ( have_posts() ) : the_post(); ?>
+                    <?php query_posts( 'category=8');
+                    while ( have_posts() ) : the_post(); ?>
                     <div class="project-wrapper">
                         <div class="project-1-main-img">
                             <a href="<?php the_permalink(); ?>"><?php the_post_thumbnail(); ?></a>
