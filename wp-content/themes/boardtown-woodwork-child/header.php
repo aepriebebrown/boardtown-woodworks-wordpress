@@ -30,7 +30,13 @@
 			<div id="hero">
 				<div class="hero-img">
 					<div class="hero-text">
-						<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
+						<div class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php $custom_logo_id = get_theme_mod( 'custom_logo' );
+						$logo = wp_get_attachment_image_src( $custom_logo_id , 'full' );
+						if ( has_custom_logo() ) {
+							echo '<img src="'. esc_url( $logo[0] ) .'">';
+						} else {
+							echo '<h1>'. get_bloginfo( 'name' ) .'</h1>';
+						} ?></a></div>
 					</div>
 				</div>
 			</div>
@@ -38,7 +44,13 @@
 				<div id="hero">
 					<div class="hero-img">
 						<div class="hero-text">
-							<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
+							<div class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php $custom_logo_id = get_theme_mod( 'custom_logo' );
+							$logo = wp_get_attachment_image_src( $custom_logo_id , 'full' );
+							if ( has_custom_logo() ) {
+								echo '<img src="'. esc_url( $logo[0] ) .'">';
+							} else {
+								echo '<h1>'. get_bloginfo( 'name' ) .'</h1>';
+							} ?></a></div>
 						</div>
 					</div>
 				</div>

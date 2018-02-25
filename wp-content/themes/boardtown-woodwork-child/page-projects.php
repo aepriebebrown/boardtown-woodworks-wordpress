@@ -18,18 +18,10 @@ get_header(); ?>
             <div id="wrapper">
                 <div class="projects-main">
                     <?php query_posts( 'category=8');
-                    while ( have_posts() ) : the_post();
-					$image_1 = get_field('image_1');
-					$image_2 = get_field('image_2');
-					$image_3 = get_field('image_3');
-					$image_4 = get_field('image_4');
-					$image_5 = get_field('image_5');
-					$fullsize = "full"; ?>
+                    while ( have_posts() ) : the_post(); ?>
                     <div class="project-wrapper">
                         <div class="project-1-main-img">
-                            <a href="<?php the_permalink(); ?>" ><?php if($image_1) {
-								echo wp_get_attachment_image( $image_1, $fullsize );
-								} ?></a>
+                            <a href="<?php the_permalink(); ?>"><?php the_post_thumbnail(); ?></a>
                         </div>
                         <div class="project-1-main-text">
                             <h2><?php the_title(); ?></h2>
