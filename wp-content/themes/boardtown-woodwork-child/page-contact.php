@@ -24,7 +24,7 @@ get_header(); ?>
                     </div>
                 </div>
             </div><!--end of wrapper-->
-			<? endwhile; ?>
+		<?php endwhile; ?>
 
 		</main><!-- #main -->
 	</div><!-- #primary -->

@@ -28,7 +28,7 @@ get_header(); ?>
                             <?php the_content(); ?>
                         </div>
                     </div>
-    			    <? endwhile; ?>
+				<?php endwhile; ?>
             </div><!--#wrapper-->
 		</main><!-- #main -->
 	</div><!-- #primary -->
